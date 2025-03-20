@@ -1,2 +1,2 @@
 # LinuxTools
-Ssh tools for daily use.
+A go/shell tool to connect server.
