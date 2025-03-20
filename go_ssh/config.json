@@ -1,0 +1,28 @@
+{
+    "servers": [
+        {
+            "alias": "server1",
+            "address": "192.168.0.200",
+            "port": 22,
+            "user": "root",
+            "password": "123412414124",
+            "use_key": false
+        },
+        {
+            "alias": "server2",
+            "address": "192.168.0.201",
+            "port": 22,
+            "user": "root",
+            "password": "",
+            "use_key": false
+        },
+        {
+            "alias": "server3",
+            "address": "192.168.0.102",
+            "port": 24,
+            "user": "admin",
+            "private_key": "~/.ssh/id_rsa",
+            "use_key": true
+        }
+    ]
+}
