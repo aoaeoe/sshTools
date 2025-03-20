@@ -1,7 +1,7 @@
 # LinuxTools
 A go/shell tool to connect server.
 
-useage:
+usage:
 
 if go_ssh:
 
