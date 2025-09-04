@@ -1,4 +1,4 @@
-# LinuxTools
+# SSHTools
 A go/shell tool to connect server.
 
 usage:
