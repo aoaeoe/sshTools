@@ -230,16 +230,13 @@ func (t *SSHTerminal) interactiveSession() (err error) {
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(2)
 
-	go func() {
-		defer wg.Done()
+	wg.Go(func() {
 		_, _ = io.Copy(os.Stderr, t.stderr)
-	}()
-	go func() {
-		defer wg.Done()
+	})
+	wg.Go(func() {
 		_, _ = io.Copy(os.Stdout, t.stdout)
-	}()
+	})
 
 	// Handle user input
 	go func() {
