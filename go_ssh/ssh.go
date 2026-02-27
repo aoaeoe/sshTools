@@ -128,16 +128,15 @@ func connectToServer(server *Server) (err error) {
 	return s.interactiveSession()
 }
 
-func (t *SSHTerminal) updateTerminalSize() (err error) {
+func (t *SSHTerminal) updateTerminalSize() {
 	go func() {
 		// SIGWINCH is sent to the process when the window size of the terminal has changed.
 		sigwinchCh := make(chan os.Signal, 1)
 		signal.Notify(sigwinchCh, syscall.SIGWINCH)
 
 		fd := int(os.Stdin.Fd())
-		termWidth, termHeight, errs := term.GetSize(fd)
-		if errs != nil {
-			err = errs
+		termWidth, termHeight, err := term.GetSize(fd)
+		if err != nil {
 			fmt.Println(err)
 			return
 		}
@@ -172,8 +171,6 @@ func (t *SSHTerminal) updateTerminalSize() (err error) {
 			}
 		}
 	}()
-
-	return
 }
 
 func (t *SSHTerminal) interactiveSession() (err error) {
@@ -217,10 +214,7 @@ func (t *SSHTerminal) interactiveSession() (err error) {
 		return
 	}
 
-	err = t.updateTerminalSize()
-	if err != nil {
-		return
-	}
+	t.updateTerminalSize()
 
 	t.stdin, err = t.Session.StdinPipe()
 	if err != nil {
